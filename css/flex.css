@@ -6,7 +6,7 @@ body {
   width: 800px;
   /* 余白を取り除き中央揃え */
   margin: 0 auto;
-  /* 必ずmin-heightは100vh */
+  /* min-heightは100vh */
   min-height: 100vh;
   /* flex-directionをcolumnで縦並びのflexコンテナを作成 */
   display: flex;
