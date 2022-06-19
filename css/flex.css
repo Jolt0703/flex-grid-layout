@@ -1,0 +1,73 @@
+/* -----------------flexコンテナ------------------ */
+body {
+  /* フォントサイズ */
+  font-size: 2rem;
+  /* 固定幅 */
+  width: 800px;
+  /* 余白を取り除き中央揃え */
+  margin: 0 auto;
+  /* 必ずmin-heightは100vh */
+  min-height: 100vh;
+  /* flex-directionをcolumnで縦並びのflexコンテナを作成 */
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  /* flexコンテナであることを指定 */
+  /* 子要素はflexアイテムとなりデフォルトでは横並び */
+  display: flex;
+  /* flexプロパティでflexアイテムの大きさを指定 */
+  flex: 1;
+}
+/* -----------------flexコンテナ------------------ */
+
+/* -----------------flexアイテム------------------ */
+header {
+  height: 150px;
+  background-color: #78a195;
+}
+
+footer {
+  height: 200px;
+  background-color: #0e93ab;
+}
+
+main {
+  /* flexプロパティでflexアイテムの大きさを指定 */
+  flex: 1;
+  background-color: #f2bc40;
+}
+
+nav {
+  width: 150px;
+  background-color: #f0f0f0;
+}
+
+aside {
+  width: 200px;
+  background-color: #d09661;
+}
+/* -----------------flexアイテム------------------ */
+
+/* -----------------レスポンシブ対応------------------ */
+
+/* メディアクエリ */
+/* 画面幅が900px以下となった場合にcssが適用される */
+@media screen and (max-width: 1000px) {
+  body,
+  nav,
+  aside {
+    /* body,nav, aideタグのwidthを上書きして横スクロールと余白を消す*/
+    width: 100%;
+  }
+  div {
+    /* 縦並びに変更 */
+    flex-direction: column;
+  }
+  main {
+    /* スマホ画面ではmainコンテナをヘッター直下にする */
+    /* flexアイテムのorderプロパティ、数字が低いほど先に表示される*/
+    order: -1;
+  }
+}

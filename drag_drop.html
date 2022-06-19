@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="text/javascript">
+    var dragSrcEl = null;
+
+    function handleDragStart(e) {
+      dragSrcEl = this;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/html', this.outerHTML);
+      this.classList.add('dragElem');
+    }
+
+    function handleDragOver(e) {
+      if (e.preventDefault) {
+        e.preventDefault();
+      }
+      this.classList.add('over');
+      e.dataTransfer.dropEffect = 'move';
+      return false;
+    }
+
+    function handleDragEnter(e) {
+    }
+
+    function handleDragLeave(e) {
+      this.classList.remove('over');
+    }
+
+    function handleDrop(e) {
+      if (e.stopPropagation) {
+        e.stopPropagation();
+      }
+      if (dragSrcEl != this) {
+        this.parentNode.removeChild(dragSrcEl);
+        var dropHTML = e.dataTransfer.getData('text/html');
+        this.insertAdjacentHTML('beforebegin', dropHTML);
+        var dropElem = this.previousSibling;
+        addDnDHandlers(dropElem);
+
+      }
+      this.classList.remove('over');
+      return false;
+    }
+
+    function handleDragEnd(e) {
+      this.classList.remove('over');
+    }
+
+    function addDnDHandlers(elem) {
+      elem.addEventListener('dragstart', handleDragStart, false);
+      elem.addEventListener('dragenter', handleDragEnter, false)
+      elem.addEventListener('dragover', handleDragOver, false);
+      elem.addEventListener('dragleave', handleDragLeave, false);
+      elem.addEventListener('drop', handleDrop, false);
+      elem.addEventListener('dragend', handleDragEnd, false);
+    }
+
+    function PageLoad() {
+      var cols = document.querySelectorAll('#columns .column');
+      [].forEach.call(cols, addDnDHandlers);
+    }
+  </script>
+  <style>
+    [draggable] {
+      user-select: none;
+    }
+
+    #columns {
+      list-style-type: none;
+    }
+
+    .column {
+      text-align: center;
+      cursor: move;
+    }
+
+    .column:hover {
+      cursor: pointer;
+    }
+
+    .column.over {
+      border-top: 2px solid #4c4ce4;
+    }
+  </style>
+</head>
+
+<body onload="PageLoad();">
+  <div class="row">
+    <ul class="list-group col-4" id="columns">
+      <li class="list-group-item column" draggable="true">Cras justo odio</li>
+      <li class="list-group-item column" draggable="true">Dapibus ac facilisis in</li>
+      <li class="list-group-item column" draggable="true">Morbi leo risus</li>
+      <li class="list-group-item column" draggable="true">Porta ac consectetur ac</li>
+      <li class="list-group-item column" draggable="true">Vestibulum at eros</li>
+    </ul>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
