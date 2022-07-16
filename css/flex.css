@@ -1,13 +1,16 @@
-/* -----------------flexコンテナ------------------ */
+html,
 body {
-  /* フォントサイズ */
-  font-size: 2rem;
+  height: 100%;
   /* 固定幅 */
   width: 800px;
   /* 余白を取り除き中央揃え */
   margin: 0 auto;
-  /* min-heightは100vh */
-  min-height: 100vh;
+}
+
+/* -----------------flexコンテナ------------------ */
+body {
+  /* フォントサイズ */
+  font-size: 2rem;
   /* flex-directionをcolumnで縦並びのflexコンテナを作成 */
   display: flex;
   flex-direction: column;
